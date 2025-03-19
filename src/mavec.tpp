@@ -69,11 +69,35 @@ Matrix<T> Matrix<T>::operator+(const Matrix matrix) {
 }
 
 template<class T> 
-Matrix<T> Matrix<T>::operator+(const T value) {
+Matrix<T> Matrix<T>::operator+(const T scalar) {
     Matrix temp(m_rows, m_cols);
     for (int i = 0; i < m_rows; i++) {
 	    for (int j = 0; j < m_cols; j++) {
-            temp.m_matrix[i][j] = m_matrix[i][j] + value;
+            temp.m_matrix[i][j] = m_matrix[i][j] + scalar;
+	    }
+    }
+	
+    return temp;
+}
+
+template<class T> 
+Matrix<T> Matrix<T>::operator-(const Matrix matrix) {
+    Matrix temp(m_rows, m_cols);
+    for (int i = 0; i < m_rows; i++) {
+	    for (int j = 0; j < m_cols; j++) {
+            temp.m_matrix[i][j] = m_matrix[i][j] - matrix.m_matrix[i][j];
+	    }
+    }
+	
+    return temp;
+}
+
+template<class T> 
+Matrix<T> Matrix<T>::operator-(const T scalar) {
+    Matrix temp(m_rows, m_cols);
+    for (int i = 0; i < m_rows; i++) {
+	    for (int j = 0; j < m_cols; j++) {
+            temp.m_matrix[i][j] = m_matrix[i][j] - scalar;
 	    }
     }
 	
@@ -95,11 +119,11 @@ Matrix<T> Matrix<T>::operator*(const Matrix matrix) {
 }
 
 template<class T> 
-Matrix<T> Matrix<T>::operator*(const T value) {
+Matrix<T> Matrix<T>::operator*(const T scalar) {
     Matrix temp(m_rows, m_cols);
     for (int i = 0; i < m_rows; i++) {
 	    for (int j = 0; j < m_cols; j++) {
-            temp = m_matrix[i][j] * value;
+            temp[j][i] = m_matrix[j][i] * scalar;
 	    }
     }
 	
@@ -107,29 +131,49 @@ Matrix<T> Matrix<T>::operator*(const T value) {
 }
 
 template<class T> 
-T& Matrix<T>::operator()(size_t row, size_t col) const {
+Matrix<T> Matrix<T>::operator/(const T scalar) {
+    Matrix temp(m_rows, m_cols);
+    for (int i = 0; i < m_rows; i++) {
+	    for (int j = 0; j < m_cols; j++) {
+            temp[j][i] = m_matrix[j][i] / scalar;
+	    }
+    }
+	
+    return temp;
+}
+
+template<class T> 
+Matrix<T> Matrix<T>::inverse() {
+
+}
+
+template<class T> 
+Matrix<T> Matrix<T>::transpose() {
+    Matrix temp(m_cols, m_rows);
+
+    for (int i = 0; i < m_cols; i++) {
+	    for (int j = 0; j < m_rows; j++) {
+            temp(j, i) = m_matrix[i][j];
+	    }
+    }
+
+    return temp;
+}
+
+template<class T> 
+T& Matrix<T>::operator()(const size_t row, const size_t col) const {
 	return m_matrix[row][col];
 }
 
 template<class T> 
-void Matrix<T>::printSize() {
-    std::cout << m_rows << ',' << m_cols << std::endl;
-}
-
-template<class T> 
-void Matrix<T>::printData() {
+void Matrix<T>::print() {
+    std::cout << "Matrix: \n";
     for (size_t i = 0; i < m_rows; i++) {
         for (size_t j = 0; j < m_cols; j++) {
-            std::cout << m_matrix[i][j];
-            if (j != m_cols - 1) {
-                std::cout << ' ';
-            }
+            std::cout << '['<< m_matrix[i][j] << ']';
         }
-        if (i != m_rows - 1) {
-                std::cout << '\n';
-        }
+        std::cout << std::endl;
     }
-    std::cout << std::endl;
 }
 
 template<class T> 
@@ -140,6 +184,11 @@ size_t Matrix<T>::rows() {
 template<class T> 
 size_t Matrix<T>::cols() {
     return m_cols;
+}
+
+template<class T> 
+size_t Matrix<T>::size() {
+    return m_rows * m_cols;
 }
 
 template<class T> 
