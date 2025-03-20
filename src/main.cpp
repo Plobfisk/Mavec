@@ -2,14 +2,23 @@
 
 #include <iostream>
 
+class Layer {
+
+};
+
 int main() {
-    Matrix<double> matrix(3,3);
+    size_t N = 3;
+    Vector<double> A(N);
+    RowVector<double> B(N);
+    A.Random(0,1);
+    B.Random(0,1);
 
-    matrix = {1,2,3,4,5,6,7,8,9};
+    Matrix<double> C(N,N);
+    C.Random(0, 1);
 
-    matrix.transpose().print();
-
-    std::cout << matrix.size() << "" << std::endl;
+    C.print();
+    (B*A).print();
+    (C* (B*A)).print();
 
     return 0;
 }

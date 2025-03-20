@@ -1,14 +1,19 @@
 #pragma once
 #include <vector>
 
+
 constexpr uint8_t dynamic = 0x1;
 
 template<class T> 
 class Matrix {
 public:
-    Matrix(size_t rows, size_t cols);
+    Matrix(size_t, size_t);
+
     Matrix& operator=(const Matrix<T>&);
     Matrix& operator=(const std::initializer_list<T>);
+    Matrix& operator=(const T);
+
+    Matrix Random(const T, const T);
 
     // Matrix Addition
     Matrix operator+(const Matrix);
@@ -21,7 +26,7 @@ public:
     Matrix operator-(const T);
 
     // Matrix Multiplication
-    Matrix operator*(const Matrix);
+    Matrix operator*(const Matrix&);
     // Scalar Multiplication
     Matrix operator*(const T);
 
@@ -31,7 +36,8 @@ public:
     Matrix inverse();
     Matrix transpose();
 
-    T& operator()(size_t row, size_t col) const;
+    T& operator()(size_t, size_t);
+    const T& operator()(size_t, size_t) const;
 
     void print();
 
@@ -43,6 +49,28 @@ private:
     T** m_matrix;
 
     void alloc();
+};
+
+template<class T>
+class Vector : public Matrix<T> {
+public:
+    Vector(size_t size);
+
+    using Matrix<T>::operator=;
+
+    T& operator()(size_t index);
+    const T& operator()(size_t index) const;
+};
+
+template<class T>
+class RowVector : public Matrix<T> {
+public:
+    RowVector(size_t size);
+
+    using Matrix<T>::operator=;
+
+    T& operator()(size_t index);
+    const T& operator()(size_t index) const;
 };
 
 #include "../src/mavec.tpp"
