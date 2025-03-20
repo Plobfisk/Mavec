@@ -1,11 +1,11 @@
 #include "../headers/mavec.h"
 #include <iostream>
 #include <random>
-#include <cmath>
+#include <cassert>
 
-bool is_integer(float k)
-{
-  return std::floor(k) == k;
+template<class T> 
+Matrix<T>::Matrix() {
+
 }
 
 template<class T> 
@@ -208,11 +208,15 @@ Matrix<T> Matrix<T>::transpose() {
 
 template<class T>
 T& Matrix<T>::operator()(size_t row, size_t col) {
+    if (row > m_rows || col > m_cols) assert("Error: Out of bounds");
+
     return m_matrix[row][col];
 }
 
 template<class T>
 const T& Matrix<T>::operator()(size_t row, size_t col) const {
+    if (row > m_rows || col > m_cols) assert("Error: Out of bounds");
+
     return m_matrix[row][col];
 }
 
@@ -238,7 +242,18 @@ size_t Matrix<T>::cols() {
 }
 
 template<class T> 
-size_t Matrix<T>::size() {
+size_t Matrix<T>::size(int rows, int cols) {
+    if (rows > -1 || cols > -1) {
+        if (rows > -1) {
+            m_rows = rows;
+        }
+        if (cols > -1) {
+            m_cols = cols;
+        }
+
+        alloc();
+    }
+
     return m_rows * m_cols;
 }
 
@@ -249,6 +264,11 @@ void Matrix<T>::alloc() {
         m_matrix[i] = new T[m_cols];
     }
 }
+
+
+
+template<class T>
+Vector<T>::Vector() : Matrix<T>() {}
 
 template<class T>
 Vector<T>::Vector(size_t size) : Matrix<T>(size, 1) {}
@@ -263,6 +283,15 @@ const T& Vector<T>::operator()(size_t index) const {
     return Matrix<T>::operator()(index, 0);
 }
 
+template<class T>
+size_t Vector<T>::size(int size) {
+    return Matrix<T>::size(size, 1);
+}
+
+
+
+template<class T>
+RowVector<T>::RowVector() : Matrix<T>() {}
 
 template<class T>
 RowVector<T>::RowVector(size_t size) : Matrix<T>(1, size) {}
@@ -275,4 +304,9 @@ T& RowVector<T>::operator()(size_t index) {
 template<class T>
 const T& RowVector<T>::operator()(size_t index) const {
     return Matrix<T>::operator()(0, index);
+}
+
+template<class T>
+size_t RowVector<T>::size(int size) {
+    return Matrix<T>::size(1, size);
 }

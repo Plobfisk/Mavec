@@ -7,6 +7,7 @@ constexpr uint8_t dynamic = 0x1;
 template<class T> 
 class Matrix {
 public:
+    Matrix();
     Matrix(size_t, size_t);
 
     Matrix& operator=(const Matrix<T>&);
@@ -43,7 +44,7 @@ public:
 
     size_t rows();
     size_t cols();
-    size_t size();
+    size_t size(int rows = -1, int cols = -1);
 private:
     size_t m_rows, m_cols;
     T** m_matrix;
@@ -54,23 +55,31 @@ private:
 template<class T>
 class Vector : public Matrix<T> {
 public:
+    Vector();
     Vector(size_t size);
 
     using Matrix<T>::operator=;
 
     T& operator()(size_t index);
     const T& operator()(size_t index) const;
+
+    size_t size(int size = -1);
+private:
+    size_t m_rows, m_cols;
 };
 
 template<class T>
 class RowVector : public Matrix<T> {
 public:
+    RowVector();
     RowVector(size_t size);
 
     using Matrix<T>::operator=;
 
     T& operator()(size_t index);
     const T& operator()(size_t index) const;
+
+    size_t size(int size = -1);
 };
 
 #include "../src/mavec.tpp"
