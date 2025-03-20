@@ -9,7 +9,7 @@ int main() {
 
     matrix.transpose().print();
 
-    std::cout << matrix.size() << "ssss" << std::endl;
+    std::cout << matrix.size() << "" << std::endl;
 
     return 0;
 }
