@@ -39,6 +39,16 @@ private:
 };
 
 class NN {
+public:
+    NN(Vector<int> layers) {
+        m_layers.size(layers.size());
+        for (int i = 0; i < layers.size(); i++) {
+            
+        }
+    }
+
+private:
+    Vector<double> m_layers;
 
 };
 // Indexing error handling

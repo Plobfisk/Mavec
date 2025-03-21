@@ -3,11 +3,11 @@
 cmake_policy(SET CMP0009 NEW)
 
 # SOURCES at CMakeLists.txt:6 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/emil_/VS Code/Code/C++/Mavec/src/*.cpp")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/emil_/VS Code/C++/Mavec/src/*.cpp")
 set(OLD_GLOB
-  "C:/Users/emil_/VS Code/Code/C++/Mavec/src/main.cpp"
+  "C:/Users/emil_/VS Code/C++/Mavec/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/emil_/VS Code/Code/C++/Mavec/build/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "C:/Users/emil_/VS Code/C++/Mavec/build/CMakeFiles/cmake.verify_globs")
 endif()

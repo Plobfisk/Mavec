@@ -1,6 +1,6 @@
-^C:\USERS\EMIL_\VS CODE\CODE\C++\MAVEC\CMAKELISTS.TXT
+^C:\USERS\EMIL_\VS CODE\C++\MAVEC\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/emil_/VS Code/Code/C++/Mavec" "-BC:/Users/emil_/VS Code/Code/C++/Mavec/build" --check-stamp-file "C:/Users/emil_/VS Code/Code/C++/Mavec/build/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/emil_/VS Code/C++/Mavec" "-BC:/Users/emil_/VS Code/C++/Mavec/build" --check-stamp-file "C:/Users/emil_/VS Code/C++/Mavec/build/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
